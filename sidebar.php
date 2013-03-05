@@ -1,51 +1,3 @@
-<!-- <div class="span3">
- <ul class="sidebar-nav sidebar-nav-fixed unstyled">
-   <li class="active"><a href="/">Home</a></li>
-   <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"  href="#collapseOne" >
-       <i class="icon-chevron-right"></i>Students
-     </a>
-   </div>
-   <div id="collapseOne" class="accordion-body collapse">
-    <div class="accordion-inner">
-      <li><a href="#comparestudents">Progress</a></li>
-      <li><a href="#comparestudents">Grades</a></li>
-      <li><a href="#comparestudents">Compare</a></li>
-      <li><a href="#comparestudents">Graded Assignments</a></li>
-    </div>
-  </div>
-</div>  
-<div class="accordion-group">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent= "#accordion2"  href= "#collapseTwo" >
-     <i class="icon-chevron-right"></i> Classroom Management
-   </a>
- </div>
- <div id="collapseTwo" class="accordion-body collapse">
-  <div class="accordion-inner">
-    <li><a href="#Campaigns">Attendance</a></li>
-    <li><a href="#Leads">Enter Grades</a></li>
-    <li><a href="#Accounts">Discipline</a></li>
-  </div>
-</div>
-</div>  
-<div class="accordion-group">
-  <div class="accordion-heading">
-    <a class="accordion-toggle" data-toggle="collapse" data-parent= "#accordion3"  href= "#collapseThree" >
-      <i class="icon-chevron-right"></i>Communication
-    </a>
-  </div>
-  <div id="collapseThree" class="accordion-body collapse">
-    <div class="accordion-inner">
-      <li><a href="#tasks">Comment on Assignments</a></li>
-      <li><a href="#depttasks">History</a></li>
-      <li><a href="#cotasks">Schedule a Conference</a></li>
-    </div>
-  </div>
-</div>  
-</div> 
-</div> -->
 <?php
 session_start();
 
@@ -91,6 +43,7 @@ foreach($links as $link)
 {
   if ($link->rel == 'getSections') {
     $sectionsURL = $link->href;
+    break;
   }
 }
 
@@ -133,16 +86,16 @@ curl_close($ch);
       {
         print '<div class="accordion-group">';
         print '<div class="accordion-heading">';
-        print '<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"  href="#collapse'.$section->id.'">';
+        print sprintf('<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"  href="#collapse%s">',$section->id);
         print $section->uniqueSectionCode;
         print '</a>';
         print '</div>';
-        print '<div id="collapse'.$section->id.'" class="accordion-body collapse">';
+        print sprintf('<div id="collapse%s" class="accordion-body collapse">',$section->id);
         print '<div class="accordion-inner">';
-        print '<li><a href="#">Students</a></li>';
-        print '<li><a href="#">Grades</a></li>';
-        print '<li><a href="#">Compare</a></li>';
-        print '<li><a href="#">Graded Assignments</a></li>';
+        print sprintf('<li><a href="students.php?sectionId=%s">Students</a></li>',$section->id);
+        print '<li><a href="#">Grades</a><span class="label label-important">NYI</span></li>';
+        print '<li><a href="#">Compare</a><span class="label label-important">NYI</span></li>';
+        print '<li><a href="#">Graded Assignments</a><span class="label label-important">NYI</span></li>';
         print '</div>';
         print '</div>';
         print '</div>';  
