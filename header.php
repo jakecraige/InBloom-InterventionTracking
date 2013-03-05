@@ -79,14 +79,6 @@ if ($json->code == '401') {
           <div class="nav-collapse collapse">
             <ul class="nav  pull-left">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> My Classes <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#"><i class="icon-user"></i> Attendance</a></li>
-                  <li><a href="#"><i class="icon-check"></i> Participation</a></li>
-                </ul>
-              </li>
-
-              <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-pencil"></i> Manage Class <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#"><i class="icon-arrow-up"></i> Students</a></li>
