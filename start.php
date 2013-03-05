@@ -1,4 +1,7 @@
-<?php include 'header.php'; ?>
+<?php 
+session_start();
+include 'header.php'; 
+?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">
     <?php include 'sidebar.php'; ?>
