@@ -1,50 +1,16 @@
 <?php
 session_start();
+include_once 'settings.php';
+include_once 'api.php';
 
-//open connection
-$ch = curl_init();
-
-$url = 'https://api.sandbox.inbloom.org/api/rest/v1.1/system/session/check';
-//$url = 'https://api.sandbox.slcedu.org/api/rest/system/session/check';
-
-$token = $_SESSION['access_token'];
-$code = $_SESSION['code'];
-
-$auth = sprintf('Authorization: bearer %s', $token);
-//echo $auth;
-
-$headers = array(
-  'Content-Type: application/vnd.slc+json',
-  'Accept: application/vnd.slc+json',
-  $auth);
-
-curl_setopt($ch, CURLOPT_URL, $url); 
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-
-if (DISABLE_SSL_CHECKS == TRUE) {
-// WARNING: this would prevent curl from detecting a 'man in the middle' attack
-// See note in settings.php 
-  curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-  curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-}
-
-//execute post
-$result = curl_exec($ch);
-// echo $result;
-$json = json_decode($result);
-
-// If response is '401 Unauthorized', redirect back to home page for authentication
+$api = new API(BASE_API, $_SESSION['access_token'], $_SESSION['code']);
+$json = $api->execute('system/session/check');
 if ($json->code == '401') {
   header('Location: index.php');
   die();
 }
-
-//close connection
-curl_close($ch);
-
-
 ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -96,7 +62,6 @@ curl_close($ch);
           </ul>
 
           <ul class="nav pull-right">
-            <li><a href="#"><i class="icon-arrow-up"></i> Parents</a></li>
             <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
           </ul> <!-- .nav -->
         </div><!--/.nav-collapse -->

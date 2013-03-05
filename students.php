@@ -1,46 +1,8 @@
-<?php
-session_start();
+<?php 
+	include 'header.php';
 
-
-$ch = curl_init();
-
-$url = sprintf('https://api.sandbox.inbloom.org/api/rest/v1.1/sections/%s/studentSectionAssociations/students', $_GET['sectionId']);
-
-$token = $_SESSION['access_token'];
-$code = $_SESSION['code'];
-
-$auth = sprintf('Authorization: bearer %s', $token);
-//echo $auth;
-
-$headers = array(
-  'Content-Type: application/vnd.slc+json',
-  'Accept: application/vnd.slc+json',
-  $auth);
-
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-curl_setopt($ch, CURLOPT_POST, FALSE);
-curl_setopt($ch, CURLOPT_HTTPGET, TRUE);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-
-if (DISABLE_SSL_CHECKS == TRUE) {
-// WARNING: this would prevent curl from detecting a 'man in the middle' attack
-// See note in settings.php 
-  curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-  curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-}
-
-
-//execute post
-$result = curl_exec($ch);
-
-//close connection
-curl_close($ch);
-
-$students = json_decode($result);
+	$students = $api->execute(sprintf('sections/%s/studentSectionAssociations/students', $_GET['sectionId']));
 ?>
-<?php include 'header.php'; ?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">
     <?php include 'sidebar.php'; ?>
