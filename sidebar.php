@@ -34,6 +34,8 @@ print "\t\t\t\t<ul class='sidebar-nav unstyled' style='position: fixed;>";
       print "\t\t\t\t\t\t\t\t<ul class='unstyled'>\n";
       print sprintf("\t\t\t\t\t\t\t\t\t<li><a href='students.php?sectionId=%s'><i class='icon-th'></i>Students</a></li>\n",$section->id);
       print "\t\t\t\t\t\t\t\t\t<li><a href='#'><i class='icon-book'></i>Grades </a><span class='label label-important'>NYI</span></li>\n";
+      print "\t\t\t\t\t\t\t\t\t<li><a href='#''><i class='icon-user'></i> Attendance</a></li>\n";
+      print "\t\t\t\t\t\t\t\t\t<li><a href='#''><i class='icon-check'></i> Participation</a></li>\n";
       print "\t\t\t\t\t\t\t\t</ul>\n";
       print "\t\t\t\t\t\t\t\t</div>\n";
       print "\t\t\t\t\t\t</div>\n";
