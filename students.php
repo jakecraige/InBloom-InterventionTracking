@@ -1,4 +1,5 @@
 <?php 
+session_start();
 	include 'header.php';
 
 	$students = $api->execute(sprintf('sections/%s/studentSectionAssociations/students', $_GET['sectionId']));
@@ -13,27 +14,28 @@
 			{
 				if($count == 0)
 				{
-					echo '<div class="row">';
+					print '<div class="row">';
 				}
 
 				$count++;
 
-				echo '<div class="span4 well well-small">';
-				echo sprintf('<p><strong>Name:</strong> %s %s %s <small>%s</small><br>',$student->name->firstName, $student->name->middleName, $student->name->lastSurname, $student->name->generationCodeSuffix);
-				echo sprintf('<strong>Address: </strong><address>%s</address>', $student->address);
-				echo sprintf('<strong>Email: </strong><address>%s</address></p>', $student->electronicMail->emailAddress);
-				echo '</div>';
+				print '<div class="span4 well well-small">';
+				print '<img src="http://placehold.it/80" style="width: 100%; text-align: center;">';
+				print sprintf('<p style="text-align: center;"><strong>Name:</strong> %s %s %s <small>%s</small><br>',$student->name->firstName, $student->name->middleName, $student->name->lastSurname, $student->name->generationCodeSuffix);
+				print '<a href="http://inbloom.hunterskrasek.com/educationupdates.html" rel="shadowbox;width=600px" class="btn btn-small">Live Feed</a>';
+				print '</p>';
+				print '</div>';
 
 				if($count == 3)
 				{
-					echo '</div>';
+					print '</div>';
 					$count = 0;
 				}
 			}
 
 			if($count != 0)
 			{
-				echo '</div>';
+				print '</div>';
 			}
 		?>
     </div>
