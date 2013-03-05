@@ -65,7 +65,7 @@ curl_close($ch);
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="/" class="brand">Intervention Thingy</a>
+        <a href="/" class="brand">Intervention Thingy <span class="label label-important">Alpha</span></a>
         <div class="nav-collapse collapse">
           <ul class="nav  pull-left">
             <li class="dropdown">
@@ -95,9 +95,9 @@ curl_close($ch);
             </li>
           </ul>
 
-          <ul class="nav  pull-right">
+          <ul class="nav pull-right">
             <li><a href="#"><i class="icon-arrow-up"></i> Parents</a></li>
-            <li><p><?php echo $json->full_name; ?></p></li>
+            <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
           </ul> <!-- .nav -->
         </div><!--/.nav-collapse -->
       </div>
