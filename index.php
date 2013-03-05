@@ -6,14 +6,14 @@ include 'settings.php';
 
 // If the session verification code is not set, redirect to the SLC Sandbox authorization endpoint
 if (!isset($_GET['code'])) {
-  $url = 'https://api.sandbox.slcedu.org/api/oauth/authorize?client_id=' . CLIENT_ID . '&redirect_uri=' . REDIRECT_URI;
+  $url = 'https://api.sandbox.inbloom.org/api/oauth/authorize?client_id=' . CLIENT_ID . '&redirect_uri=' . REDIRECT_URI;
 header('Location: ' . $url);
     die('Redirect'); 
 } else {
   
 session_start();
     
-$url = 'https://api.sandbox.slcedu.org/api/oauth/token?client_id=' . CLIENT_ID . '&client_secret=' . CLIENT_SECRET . '&grant_type=authorization_code&redirect_uri='.REDIRECT_URI.'&code='. $_GET['code'];
+$url = 'https://api.sandbox.inbloom.org/api/oauth/token?client_id=' . CLIENT_ID . '&client_secret=' . CLIENT_SECRET . '&grant_type=authorization_code&redirect_uri='.REDIRECT_URI.'&code='. $_GET['code'];
 
 
 //open connection

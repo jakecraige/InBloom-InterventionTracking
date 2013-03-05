@@ -4,7 +4,7 @@ session_start();
 //open connection
 $ch = curl_init();
 
-$url = 'https://api.sandbox.slcedu.org/api/rest/v1/students';
+$url = 'https://api.sandbox.inbloom.org/api/rest/v1.1/system/session/check';
 //$url = 'https://api.sandbox.slcedu.org/api/rest/system/session/check';
 
 $token = $_SESSION['access_token'];
@@ -40,7 +40,7 @@ if ($json->code == '401') {
   die();
 }
 
-//https://localhost/api/rest/v1/teachers/<UUID>/teacherSectionAssociations/sections
+//https://localhost/api/rest/v1.1/teachers/<UUID>/teacherSectionAssociations/sections
 
 //foreach($json as $students) {
 //  $found = false;
@@ -116,7 +116,7 @@ curl_close($ch);
 
           <ul class="nav  pull-right">
             <li><a href="#"><i class="icon-arrow-up"></i> Parents</a></li>
-            <li>
+            <li><p><?php echo $json->full_name; ?></p></li>
           </ul> <!-- .nav -->
         </div><!--/.nav-collapse -->
       </div>
