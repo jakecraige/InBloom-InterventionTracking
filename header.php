@@ -75,7 +75,7 @@ if ($json->code == '401') {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="brand">inComm <span class="label label-important">Alpha</span></a>
+          <a href="/" class="brand"><img src="img/incommlogo-small.png"><span class="label label-important">Alpha</span></a>
           <div class="nav-collapse collapse">
             <ul class="nav  pull-left">
               <li class="dropdown">
