@@ -19,6 +19,7 @@ if ($json->code == '401') {
   <title>Intervention Thingy</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="http://hunterskrasek.com/css/font-awesome.min.css">
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
 </head>
@@ -35,15 +36,15 @@ if ($json->code == '401') {
         <div class="nav-collapse collapse">
           <ul class="nav  pull-left">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">My Classes <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> My Classes <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"><i class="icon-user"></i> Attendance</a></li>
-                <li><a href="#">Participation</a></li>
+                <li><a href="#"><i class="icon-check"></i> Participation</a></li>
               </ul>
             </li>
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Class <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-pencil"></i> Manage Class <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="#"><i class="icon-arrow-up"></i> Students</a></li>
                 <li><a href="#">Interventions</a></li>
@@ -51,9 +52,9 @@ if ($json->code == '401') {
             </li>
 
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schedule <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-calendar"></i>Schedule <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#"><i class="icon-user"></i>Parent Teacher Conference</a></li>
+                <li><a href="#"><i class="icon-user"></i> Parent Teacher Conference</a></li>
                 <li><a href="#">Office Hours</a></li>
                 <li><a href="#">In Class</a></li>
                 <li><a href="#">Detentions</a></li>
@@ -62,6 +63,7 @@ if ($json->code == '401') {
           </ul>
 
           <ul class="nav pull-right">
+            <li><a href="#"><i class="icon-envelope"></i> Notifications</a></li>
             <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
           </ul> <!-- .nav -->
         </div><!--/.nav-collapse -->
