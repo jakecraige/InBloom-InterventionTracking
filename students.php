@@ -20,7 +20,7 @@ session_start();
 				$count++;
 
 				print '<div class="span4 well well-small">';
-				print '<img src="http://placehold.it/80" style="width: 100%; text-align: center;">';
+				print '<img src="img/userp.png" style="width: 100%; text-align: center;">';
 				print sprintf('<p style="text-align: center; text-size: 20px;"><abbr title="Click to view more"><a href="student.php?id=%s" style="color: #000; text-decorations: none;" rel="shadowbox;width=800px"> %s %s %s <small>%s</small></a></abbr><br>',$student->id, $student->name->firstName, $student->name->middleName, $student->name->lastSurname, $student->name->generationCodeSuffix);
 				print '<a href="http://inbloom.hunterskrasek.com/educationupdates.html" rel="shadowbox;width=600px" class="btn btn-small btn-block">Live Feed</a>';				
 				print '</p>';
