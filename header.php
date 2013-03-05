@@ -15,7 +15,7 @@ if ($json->code == '401') {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Intervention Thingy</title>
+  <title>inComm</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="http://hunterskrasek.com/css/font-awesome.min.css">
@@ -23,7 +23,9 @@ if ($json->code == '401') {
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://www.cs.stedwards.edu/~sazua/cosc4157/shadowbox-3.0.3/shadowbox-3.0.3/shadowbox.js"></script>
   <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
-  <script type="text/javascript">Shadowbox.init();</script>
+  <script type="text/javascript">
+    Shadowbox.init();
+  </script>
 
   <style type="text/css">
       html, body {
@@ -57,6 +59,10 @@ if ($json->code == '401') {
           padding-right: 20px;
         }
       }
+
+      .container .credit {
+        margin: 20px 0;
+      }
   </style>
 </head>
 <body>
@@ -69,7 +75,7 @@ if ($json->code == '401') {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="brand">Intervention Thingy <span class="label label-important">Alpha</span></a>
+          <a href="/" class="brand">inComm <span class="label label-important">Alpha</span></a>
           <div class="nav-collapse collapse">
             <ul class="nav  pull-left">
               <li class="dropdown">
@@ -100,7 +106,7 @@ if ($json->code == '401') {
             </ul>
 
             <ul class="nav pull-right">
-              <li><a href="#"><i class="icon-envelope"></i> Notifications</a></li>
+              <li><a href="#"><i class="icon-envelope"></i> Notifications <span class="badge">0</span></a></li>
               <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
             </ul> <!-- .nav -->
           </div><!--/.nav-collapse -->
