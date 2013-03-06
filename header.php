@@ -15,7 +15,7 @@ if ($json->code == '401') {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>inComm - Alpha</title>
+  <title>inComm - Beta</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="http://hunterskrasek.com/css/font-awesome.min.css">
@@ -33,8 +33,40 @@ if ($json->code == '401') {
   $(document).ready(function(){
     $('.student').on("click", updateStudentAttendance);
     $('.student').dblclick(markTardy);
+
+    $('.studentP button.up').on("click", markStudentParticipationUp);
+    $('.studentP button.down').on("click", markStudentParticipationDown);
+    // $('.studentP').on("click", markStudentParticipation);
+    // $('.studentP').dblclick(markTardy);
   });
 
+  function markStudentParticipationUp()
+  {
+    if( $(this).parent().hasClass('nuetral'))
+    {
+      $(this).parent().removeClass('nuetral');
+      $(this).parent().addClass('participation');
+    }
+    else if($(this).parent().hasClass('noparticipation'))
+    {
+      $(this).parent().removeClass('noparticipation');
+      $(this).parent().addClass('nuetral');
+    } 
+  }
+
+  function markStudentParticipationDown()
+  {
+    if( $(this).parent().hasClass('nuetral'))
+    {
+      $(this).parent().removeClass('nuetral');
+      $(this).parent().addClass('noparticipation');
+    }
+    else if($(this).parent().hasClass('participation'))
+    {
+      $(this).parent().removeClass('participation');
+      $(this).parent().addClass('nuetral');
+    }
+  }
 
   function updateStudentAttendance(event)
   {
@@ -89,6 +121,22 @@ if ($json->code == '401') {
     }
   }
 
+  function markAllNotParticipating()
+  {
+    if($('.studentP').hasClass('participating')) {
+      $('.studentP').addClass('noparticipation');
+      $('.studentP').removeClass('participation');
+    }
+  }
+
+  function markAllParticipating()
+  {
+    if($('.studentP').hasClass('noparticipation')) {
+      $('.studentP').addClass('participation');
+      $('.studentP').removeClass('noparticipation');
+    }
+  }
+
   function markAllAbsent()
   {
     if($('.student').hasClass('here')) {
@@ -129,17 +177,18 @@ if ($json->code == '401') {
     background-color: #000;
   }
 
-  .here {
+  .here, .participation {
     background: #468847;
   }
 
-  .absent {
+  .absent, .noparticipation {
     background: #b94a48;
   }
 
-  .tardy {
+  .tardy, .someparticipation {
     background: #f89406;
   }
+
 
   .student:hover {
     border: solid 1px #CCC;
@@ -173,7 +222,7 @@ if ($json->code == '401') {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="brand"><img src="img/incommlogo-small.png"> <span class="label label-important">Alpha</span></a>
+          <a href="/" class="brand"><img src="img/incommlogo-small.png"> <span class="label label-success">Beta</span></a>
           <div class="nav-collapse collapse">
             <ul class="nav  pull-left">
               <li class="dropdown">

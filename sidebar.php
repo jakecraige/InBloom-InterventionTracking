@@ -36,7 +36,7 @@ $sections = $api->execute($sectionsURL);
         print sprintf('<li><a href="students.php?sectionId=%s&schoolId=%s"><i class="icon-th"></i>Students</a></li>',$section->id, $section->schoolId);
         // print '<li><a href="#"><i class="icon-book"></i>Grades </a><span class="label label-important">NYI</span></li>';
         print sprintf('<li><a href="attendance.php?sectionId=%s&schoolId=%s"><i class="icon-user"></i>Attendance </a></li>', $section->id, $section->schoolId);
-        print '<li><a href="participation.php?sectionId=%s&schoolId=%s"><i class="icon-check"></i>Participation </a></li>';
+        print sprintf('<li><a href="participation.php?sectionId=%s&schoolId=%s"><i class="icon-check"></i>Participation </a></li>',$section->id, $section->schoolId);
         print '</ul>';
         print '</div>';
         print '</div>';
