@@ -15,16 +15,18 @@ if ($json->code == '401') {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>inComm</title>
+  <title>inComm - Alpha</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="http://hunterskrasek.com/css/font-awesome.min.css">
-  <link rel="stylesheet" href="http://www.cs.stedwards.edu/~sazua/cosc4157/shadowbox-3.0.3/shadowbox-3.0.3/shadowbox.css" type="text/css">
+  <link rel="stylesheet" href="http://hunterskrasek.com/css/shadowbox.css" type="text/css">
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-  <script src="http://www.cs.stedwards.edu/~sazua/cosc4157/shadowbox-3.0.3/shadowbox-3.0.3/shadowbox.js"></script>
+  <script src="http://hunterskrasek.com/js/shadowbox.js"></script>
   <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
+<script src="http://raw.github.com/apigee/usergrid-javascript-sdk/0.10.4/usergrid.min.js"></script>
+
   <script type="text/javascript">
-    Shadowbox.init();
+    Shadowbox.init({viewportPadding:50});
   </script>
 
   <style type="text/css">
@@ -48,6 +50,10 @@ if ($json->code == '401') {
       }
       #footer {
         background-color: #000;
+      }
+
+      #attendanceSort ul li{
+        display: inline;
       }
 
       /* Lastly, apply responsive CSS fixes as necessary */
@@ -96,9 +102,68 @@ if ($json->code == '401') {
                 </ul>
               </li>
             </ul>
+<!--************************************************************************************************-->
+  <script type="text/javascript">
+                
+                var apigee = new Usergrid.Client({
+                                                 orgName:'sazua',
+                                                 appName:'sandbox'
+                                                 });
+                
+                $(document).ready(function () {
+                                  
 
+					
+setInterval(function () {
+					var number=0;
+                                  //a new Collection object that will be used to hold the full feed list
+                                  var my_books = new Usergrid.Collection({ "client":apigee, "type":"comments" });//"qs":{"ql":"order by author"}
+                                  //make sure messages are pulled back in order
+                                  my_books.fetch(
+                                                 
+                                                // Success Callback
+                                                 function(){
+                                      
+                                                 while(my_books.hasNextEntity())
+                                                 {
+                                                 var current_book = my_books.getNextEntity();
+
+					var theSender=current_book.get('sender');
+						if(theSender=="Parent")
+						{
+						
+						number=number+1;
+						}
+	
+                                                 }
+                                               document.getElementById('badge2').innerHTML=number;                                       
+
+                                                 },
+                                                 
+                                                 // Failure Callback
+                                                 function(){
+                                                 alert("NO");
+                                                 }
+                                                 );
+                                                 
+                                  },1000);
+
+
+
+
+
+
+                                
+                                  
+                                  });
+
+
+                
+                </script>
+
+<!--***************************************************************************************************-->
             <ul class="nav pull-right">
-              <li><a href="#"><i class="icon-envelope"></i> Notifications <span class="badge">0</span></a></li>
+              <li><a href="#"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
               <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
             </ul> <!-- .nav -->
           </div><!--/.nav-collapse -->

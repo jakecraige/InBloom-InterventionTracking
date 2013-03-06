@@ -7,11 +7,26 @@ $api = new API(BASE_API, $_SESSION['access_token'], $_SESSION['code']);
 
 $student = $api->execute(sprintf('students/%s', $_GET['id']));
 
-print '<div class="student" style="background: #fff; height: 100%;">';
-print '<img src="img/userp.png" class="pull-left" style="width: 45%;">';
-print '<p class="pull-right">';
-print $student->name->firstName;
+print '<html>';
+print '<head>';
+print sprintf('<title>Student - %s %s</title>', $student->name->firstName, $student->name->lastSurname);
+print '<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">';
+print '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>';
+print '<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>';
+print '</head>';
+print '<body>';
+print '<div class="row" style="padding-top: 2%;">';
+print '<div class="span3 offset1 well well-small">';
+print '<img src="img/userp.png">';
+print '</div>';
+print '<div class="span2">';
+print '<p>';
+print sprintf('<strong>Full Name:</strong> %s %s %s <small>%s</small>', $student->name->firstName, ($student->name->middleName != null ? $student->name->middleName : ''), $student->name->lastSurname, ($student->name->generationCodeSuffix != null ? $student->name->generationCodeSuffix : ''));
 print '</p>';
-print '</div>'
+print '</div>';
+print '</div>';
+print '</div>';
+print '</body>';
+print '</html>';
 
 ?>

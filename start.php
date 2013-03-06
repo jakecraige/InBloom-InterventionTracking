@@ -6,7 +6,10 @@ include 'header.php';
   <div class="row-fluid">
     <?php include 'sidebar.php'; ?>
     <div class="span9">
-
+		<div class="hero-unit">
+	        <h1>inComm!</h1>
+	        <p>Preventing failure through communication.</p>
+      	</div>
     </div>
   </div>
 </div>
