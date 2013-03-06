@@ -31,10 +31,10 @@ class API
 	* Execute a CURL call
 	* @param string $entity_url 
 	*/
-	public function execute($entity_url)
+	public function execute($entity_url, $post = FALSE, $put = FALSE, $post_data = array())
 	{
 		$ch = curl_init();
-
+		// echo $this->base_url . '/' . $entity_url;
 		curl_setopt($ch, CURLOPT_URL, $this->base_url . '/' . $entity_url);
 		$headers = array(
 			'Content-Type: application/vnd.slc+json',
@@ -47,6 +47,20 @@ class API
 		if (DISABLE_SSL_CHECKS == TRUE) { 
 		  curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
 		  curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		}
+
+		if ($post == TRUE) {
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+			echo "POST";
+			// echo json_encode($post_data);
+		}
+
+		if ($put == TRUE) {
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+			echo "PUT";
+			// echo json_encode($post_data);
 		}
 
 		//execute post

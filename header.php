@@ -38,15 +38,38 @@ if ($json->code == '401') {
 
   function updateStudentAttendance(event)
   {
-    // alert($(this).attr('id'));
     if ($(this).hasClass('here')) {
       $(this).removeClass('here');
       $(this).addClass('absent');
+      var schoolId = $(this).children('p').attr('id');
+      var studentId = $(this).attr('id');
+      postAttendance(studentId, schoolId, 'Absent');
     } else if ($(this).hasClass('absent')) {
       $(this).removeClass('absent');
+      $(this).addClass('tardy');
+      var schoolId = $(this).children('p').attr('id');
+      var studentId = $(this).attr('id');
+      postAttendance(studentId, schoolId, 'Tardy');
+    } else if ($(this).hasClass('tardy')) {
+      $(this).removeClass('tardy');
       $(this).addClass('here');
+      var schoolId = $(this).children('p').attr('id');
+      var studentId = $(this).attr('id');
+      postAttendance(studentId, schoolId, 'Here');
     }
     
+  }
+
+  function postAttendance(studentId, schoolId, attendanceEvent)
+  {
+    // var url = 'attendance.php?studentId=' + studentId + "&schoolId=" + schoolId + "&event=" + attendanceEvent;
+    $.post('post_attendance.php', {
+      'studentId': studentId,
+      'schoolId': schoolId,
+      'event': attendanceEvent
+    }, function(data) {
+      // alert(data);
+    });
   }
 
   function markTardy(event)
@@ -54,9 +77,31 @@ if ($json->code == '401') {
     if ($(this).hasClass('here')) {
       $(this).removeClass('here');
       $(this).addClass('tardy');
+      var schoolId = $(this).children('p').attr('id');
+      var studentId = $(this).attr('id');
+      postAttendance(studentId, schoolId, 'Tardy');
     } else if ($(this).hasClass('absent')) {
       $(this).removeClass('absent');
       $(this).addClass('tardy');
+      var schoolId = $(this).children('p').attr('id');
+      var studentId = $(this).attr('id');
+      postAttendance(studentId, schoolId, 'Tardy');
+    }
+  }
+
+  function markAllAbsent()
+  {
+    if($('.student').hasClass('here')) {
+      $('.student').addClass('absent');
+      $('.student').removeClass('here');
+    }
+  }
+
+  function markAllPresent()
+  {
+    if($('.student').hasClass('absent')) {
+      $('.student').addClass('here');
+      $('.student').removeClass('absent');
     }
   }
   </script>
@@ -164,7 +209,7 @@ if ($json->code == '401') {
               setInterval(function () {
                var number=0;
                                   //a new Collection object that will be used to hold the full feed list
-                                  var my_books = new Usergrid.Collection({ "client":apigee, "type":"comments" });//"qs":{"ql":"order by author"}
+                                  var my_books = new Usergrid.Collection({ "client":apigee, "type":"updates","qs":{"ql":"select * where sender='Parent' and read=false"} });
                                   //make sure messages are pulled back in order
                                   my_books.fetch(
 
@@ -175,17 +220,22 @@ if ($json->code == '401') {
                                                  {
                                                    var current_book = my_books.getNextEntity();
 
-                                                   var theSender=current_book.get('sender');
-                                                   if(theSender=="Parent")
-                                                   {
 
-                                                    number=number+1;
-                                                  }
+                                                   number=number+1;
 
-                                                }
-                                                document.getElementById('badge2').innerHTML=number;                                       
 
-                                              },
+                                                 }
+                                                 document.getElementById('badge2').innerHTML=number;   
+						if(number>0)
+						{
+					document.getElementById('badge2').setAttribute("class","badge badge-important");
+						}else
+						{
+						document.getElementById('badge2').setAttribute("class", "badge");
+						}
+
+
+                                               },
 
                                                  // Failure Callback
                                                  function(){
@@ -210,7 +260,7 @@ if ($json->code == '401') {
 
 <!--***************************************************************************************************-->
 <ul class="nav pull-right">
-  <li><a href="#"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
+  <li><a href="http://inbloom.hunterskrasek.com/notes.html" rel="shadowbox; width=500; height=400"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
   <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
 </ul> <!-- .nav -->
 </div><!--/.nav-collapse -->
