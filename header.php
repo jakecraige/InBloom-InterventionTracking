@@ -23,52 +23,92 @@ if ($json->code == '401') {
   <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="http://hunterskrasek.com/js/shadowbox.js"></script>
   <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>
-<script src="http://raw.github.com/apigee/usergrid-javascript-sdk/0.10.4/usergrid.min.js"></script>
+  <script src="http://hunterskrasek.com/js/usergrid.min.js"></script>
 
   <script type="text/javascript">
-    Shadowbox.init({viewportPadding:50});
+  Shadowbox.init({viewportPadding:50});
+  </script>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.student').on("click", updateStudentAttendance);
+    $('.student').dblclick(markTardy);
+  });
+
+
+  function updateStudentAttendance(event)
+  {
+    // alert($(this).attr('id'));
+    if ($(this).hasClass('here')) {
+      $(this).removeClass('here');
+      $(this).addClass('absent');
+    } else if ($(this).hasClass('absent')) {
+      $(this).removeClass('absent');
+      $(this).addClass('here');
+    }
+    
+  }
+
+  function markTardy(event)
+  {
+    if ($(this).hasClass('here')) {
+      $(this).removeClass('here');
+      $(this).addClass('tardy');
+    } else if ($(this).hasClass('absent')) {
+      $(this).removeClass('absent');
+      $(this).addClass('tardy');
+    }
+  }
   </script>
 
   <style type="text/css">
-      html, body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
+  html, body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin. */
+  }
 
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
+  /* Wrapper for page content to push down footer */
+  #wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    /* Negative indent footer by it's height */
+    margin: 0 auto -60px;
+  }
 
-      #push,
-      #footer {
-        height: 60px;
-      }
-      #footer {
-        background-color: #000;
-      }
+  #push,
+  #footer {
+    height: 60px;
+  }
+  #footer {
+    background-color: #000;
+  }
 
-      #attendanceSort ul li{
-        display: inline;
-      }
+  .here {
+    background: #468847;
+  }
 
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
+  .absent {
+    background: #b94a48;
+  }
 
-      .container .credit {
-        margin: 20px 0;
-      }
+  .tardy {
+    background: #f89406;
+  }
+
+  /* Lastly, apply responsive CSS fixes as necessary */
+  @media (max-width: 767px) {
+    #footer {
+      margin-left: -20px;
+      margin-right: -20px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+
+  .container .credit {
+    margin: 20px 0;
+  }
   </style>
 </head>
 <body>
@@ -102,71 +142,71 @@ if ($json->code == '401') {
                 </ul>
               </li>
             </ul>
-<!--************************************************************************************************-->
-  <script type="text/javascript">
-                
-                var apigee = new Usergrid.Client({
-                                                 orgName:'sazua',
-                                                 appName:'sandbox'
-                                                 });
-                
-                $(document).ready(function () {
-                                  
+            <!--************************************************************************************************-->
+            <script type="text/javascript">
 
-					
-setInterval(function () {
-					var number=0;
+            var apigee = new Usergrid.Client({
+             orgName:'sazua',
+             appName:'sandbox'
+           });
+
+            $(document).ready(function () {
+
+
+
+              setInterval(function () {
+               var number=0;
                                   //a new Collection object that will be used to hold the full feed list
                                   var my_books = new Usergrid.Collection({ "client":apigee, "type":"comments" });//"qs":{"ql":"order by author"}
                                   //make sure messages are pulled back in order
                                   my_books.fetch(
-                                                 
+
                                                 // Success Callback
-                                                 function(){
-                                      
+                                                function(){
+
                                                  while(my_books.hasNextEntity())
                                                  {
-                                                 var current_book = my_books.getNextEntity();
+                                                   var current_book = my_books.getNextEntity();
 
-					var theSender=current_book.get('sender');
-						if(theSender=="Parent")
-						{
-						
-						number=number+1;
-						}
-	
-                                                 }
-                                               document.getElementById('badge2').innerHTML=number;                                       
+                                                   var theSender=current_book.get('sender');
+                                                   if(theSender=="Parent")
+                                                   {
 
-                                                 },
-                                                 
+                                                    number=number+1;
+                                                  }
+
+                                                }
+                                                document.getElementById('badge2').innerHTML=number;                                       
+
+                                              },
+
                                                  // Failure Callback
                                                  function(){
-                                                 alert("NO");
+                                                   alert("NO");
                                                  }
                                                  );
-                                                 
-                                  },1000);
+
+},1000);
 
 
 
 
 
 
-                                
-                                  
-                                  });
 
 
-                
-                </script>
+});
+
+
+
+</script>
 
 <!--***************************************************************************************************-->
-            <ul class="nav pull-right">
-              <li><a href="#"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
-              <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
-            </ul> <!-- .nav -->
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
+<ul class="nav pull-right">
+  <li><a href="#"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
+  <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
+</ul> <!-- .nav -->
+</div><!--/.nav-collapse -->
+</div>
+</div>
+</div>
