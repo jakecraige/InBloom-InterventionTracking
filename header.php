@@ -96,6 +96,13 @@ if ($json->code == '401') {
     background: #f89406;
   }
 
+  .student:hover {
+    border: solid 1px #CCC;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+    box-shadow: 1px 1px 5px #999;
+  }
+
   /* Lastly, apply responsive CSS fixes as necessary */
   @media (max-width: 767px) {
     #footer {
