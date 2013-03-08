@@ -1,6 +1,5 @@
 <?php
-include_once 'settings.php';
-require('class.student.php');
+require('includes.php');
 
 $student = new Student($_GET['id']);
 

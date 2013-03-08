@@ -26,7 +26,7 @@
         }
 		print '<div class="accordion-group">';
             print '<div class="accordion-heading">';
-            print sprintf('<a class="accordion-toggle" data-parent="#accordion1"  href="#">', $section->getId());
+            print sprintf('<a class="accordion-toggle" data-parent="#accordion1"  href="addclass.php">', $section->getId());
             print 'Add Class';
     
             print '</a>';
