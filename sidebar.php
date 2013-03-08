@@ -1,5 +1,5 @@
 <?php
-    $sections = createSectionsArray();   
+    $sections = createClassesArray();   
 ?>
 <div class="span3">
   <ul class="sidebar-nav unstyled" style="position: fixed;">
@@ -24,7 +24,15 @@
             print '</div>';
             print '</div>';
         }
-      
+		print '<div class="accordion-group">';
+            print '<div class="accordion-heading">';
+            print sprintf('<a class="accordion-toggle" data-parent="#accordion1"  href="#">', $section->getId());
+            print 'Add Class';
+    
+            print '</a>';
+            print '</div>';
+			print '</div>';
+			
     ?>
   </ul>
 </div>
