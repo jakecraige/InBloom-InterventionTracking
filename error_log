@@ -1,2 +1,0 @@
-[08-Mar-2013 10:06:56] PHP Warning:  Missing argument 1 for createStudentsArray(), called in /home/janicesn/public_html/jakecraige.com/projects/inComm/participation.php on line 5 and defined in /home/janicesn/public_html/jakecraige.com/projects/inComm/class.student.php on line 69
-[08-Mar-2013 10:07:01] PHP Warning:  Missing argument 1 for createStudentsArray(), called in /home/janicesn/public_html/jakecraige.com/projects/inComm/participation.php on line 5 and defined in /home/janicesn/public_html/jakecraige.com/projects/inComm/class.student.php on line 69
