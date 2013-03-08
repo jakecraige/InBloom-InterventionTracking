@@ -8,7 +8,6 @@
 		private $middleName = null;
 		private $lastSurname = null;
 		private $birthday = null;
-		private $age = null;
 		private $sex = null;
 		private $race = null;
 		private $disabilities = null;
@@ -27,7 +26,6 @@
 				$this->middleName = $student['middleName'];
 				$this->lastSurname = $student['lastSurname'];
 				$this->birthday = $student['birthday'];
-				$this->age = $student['age'];
 				$this->sex = $student['sex'];
 				$this->race = $student['race'];
 				$this->disabilities = $student['disabilities'];
@@ -35,20 +33,40 @@
 				//echo $this->birthday;
 			}
 		}
-		public function __destruct(){
-          //mysqli_close($db);
-		}
+
+    	public function getId() { return $this->id; }
 		public function getSectionId() { return $this->sectionId; }
 		public function getSchoolId() { return $this->sectionId; }
 		public function getFirstName() { return $this->firstName; }
 		public function getMiddleName() { return $this->middleName; }
 		public function getLastSurname() { return $this->lastSurname; }
 		public function getBirthday() { return $this->birthday; }
-		public function getAge() { return $this->age; }
+		public function getAge() {
+    	    //calculate years of age (input string: YYYY-MM-DD)
+            list($year, $month, $day) = explode("-", $this->getBirthday());
+        
+            $year_diff  = date("Y") - $year;
+            $month_diff = date("m") - $month;
+            $day_diff   = date("d") - $day;
+        
+            if ($day_diff < 0 || $month_diff < 0)
+                $year_diff--;
+        
+            return $year_diff;   
+		}
 		public function getSex() { return $this->sex; }
 		public function getRace() { return $this->race; }
 		public function getDisabilities() { return $this->disabilities; }
 
 	}
-
+	function createStudentsArray() {
+        $students = array();
+        $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        $sql = "SELECT * FROM students";
+        $result = mysqli_query($db, $sql);
+        while($row = mysqli_fetch_array($result)) {
+            $students[] = new Student($row['id']);
+        }
+		return $students;
+    }
 ?>

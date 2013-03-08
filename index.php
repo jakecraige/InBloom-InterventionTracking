@@ -3,7 +3,7 @@
 session_start();
 
 include 'settings.php';
-
+/*
 // If the session verification code is not set, redirect to the SLC Sandbox authorization endpoint
 if (!isset($_GET['code'])) {
   $url = 'https://api.sandbox.inbloom.org/api/oauth/authorize?client_id=' . CLIENT_ID . '&redirect_uri=' . REDIRECT_URI;
@@ -45,8 +45,8 @@ $result = json_decode($result);
 // set the session with the access_token and verification code
 $_SESSION['access_token'] = $result->access_token;
 $_SESSION['code'] = $_GET['code'];
-
+*/
 // redirect to the start page of the application
 header('Location: ' . 'start.php');
-}
+//}
 ?>

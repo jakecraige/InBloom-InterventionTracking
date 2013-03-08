@@ -1,13 +1,5 @@
 <?php
-include_once 'settings.php';
-include_once 'api.php';
-
-$api = new API(BASE_API, $_SESSION['access_token'], $_SESSION['code']);
-$json = $api->execute('system/session/check');
-if ($json->code == '401') {
-  header('Location: index.php');
-  die();
-}
+    require('includes.php');
 ?>
 
 <!doctype html>
@@ -222,7 +214,7 @@ if ($json->code == '401') {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a href="/" class="brand"><img src="img/incommlogo-small.png"> <span class="label label-success">Beta</span></a>
+          <a href="/projects/inComm" class="brand"><img src="img/incommlogo-small.png"> <span class="label label-success">Beta</span></a>
           <div class="nav-collapse collapse">
             <ul class="nav  pull-left">
               <li class="dropdown">

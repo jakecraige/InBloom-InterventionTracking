@@ -1,15 +1,12 @@
 <?php
-session_start();
 include_once 'settings.php';
-include_once 'api.php';
+require('class.student.php');
 
-$api = new API(BASE_API, $_SESSION['access_token'], $_SESSION['code']);
-
-$student = $api->execute(sprintf('students/%s', $_GET['id']));
+$student = new Student($_GET['id']);
 
 print '<html>';
 print '<head>';
-print sprintf('<title>Student - %s %s</title>', $student->name->firstName, $student->name->lastSurname);
+print sprintf('<title>Student - %s %s</title>', $student->getFirstName(), $student->getlastSurname());
 print '<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">';
 print '<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>';
 print '<script src="http://twitter.github.com/bootstrap/assets/js/bootstrap.js"></script>';
@@ -21,14 +18,11 @@ print '<img src="img/userp.png">';
 print '</div>';
 print '<div class="span2">';
 print '<p>';
-print sprintf('<strong>Full Name:</strong> %s %s %s <small>%s</small>', $student->name->firstName, ($student->name->middleName != null ? $student->name->middleName : ''), $student->name->lastSurname, ($student->name->generationCodeSuffix != null ? $student->name->generationCodeSuffix : ''));
-$today = new DateTime();
-$bday = new DateTime($student->birthData->birthDate);
-$age = $today->diff($bday);
-print sprintf('<br/><strong>Age:</strong> ' . $age->y);
-print '<br/><strong>Sex:</strong> ' . $student->sex ;
-print '<br/><strong>Race:</strong> ' . (sizeof($student->race) != 0 ? $student->race : 'N/A');
-print '<br/><strong>Disabilities:</strong> ' . (sizeof($student->section504Disabilities) != 0 ? $student->section504Disabilities : 'N/A');
+print sprintf('<strong>Full Name:</strong>%s %s %s', $student->getFirstName(), ($student->getMiddleName() != null ? $student->getMiddleName() : ''), $student->getLastSurname());
+print sprintf('<br/><strong>Age:</strong> ' . $student->getAge());
+print '<br/><strong>Sex:</strong> ' . $student->getSex() ;
+print '<br/><strong>Race:</strong> ' . (sizeof($student->getRace()) != 0 ? $student->getRace() : 'N/A');
+print '<br/><strong>Disabilities:</strong> ' . (sizeof($student->getDisabilities()) != 0 ? $student->getDisabilities() : 'N/A');
 print '<br/><strong>Absences:</strong> 2';
 print '<br/><strong>Overall GPA:</strong> 2.87';
 print '</p>';

@@ -1,8 +1,7 @@
 <?php 
-session_start();
-include 'header.php';
+	include 'header.php';
 
-$students = $api->execute(sprintf('sections/%s/studentSectionAssociations/students', $_GET['sectionId']));
+	$students = createStudentsArray();
 ?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">
@@ -35,9 +34,9 @@ $students = $api->execute(sprintf('sections/%s/studentSectionAssociations/studen
 
 				$count++;
 
-				print sprintf('<div id="%s" class="student span2 well well-small here">', $student->id);
+				print sprintf('<div id="%s" class="student span2 well well-small here">', $student->getId());
 				print '<img src="img/userp.png" style="width: 100%; text-align: center;">';
-				print sprintf('<p id="%s" style="text-align: center; font-size: 12px;">%s %s', $_GET['schoolId'], $student->name->firstName, $student->name->lastSurname);				
+				print sprintf('<p id="%s" style="text-align: center; font-size: 12px;">%s %s', $_GET['schoolId'], $student->getFirstName, $student->getLastSurname());				
 				print '</p>';
 				print '</div>';
 

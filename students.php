@@ -1,8 +1,9 @@
 <?php 
 session_start();
+    require('includes.php');
 	include 'header.php';
 
-	$students = $api->execute(sprintf('sections/%s/studentSectionAssociations/students', $_GET['sectionId']));
+    $students = createStudentsArray(); 
 ?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">
@@ -21,8 +22,10 @@ session_start();
 
 				print '<div class="student span4 well well-small">';
 				print '<img src="img/userp.png" style="width: 100%; text-align: center;">';
-				print sprintf('<p style="text-align: center; text-size: 20px;"><abbr title="Click to view more"><a href="student.php?id=%s" style="color: #000; text-decorations: none;" rel="shadowbox;width=800px"> %s %s %s <small>%s</small></a></abbr><br>',$student->id, $student->name->firstName, $student->name->middleName, $student->name->lastSurname, $student->name->generationCodeSuffix);
-				print sprintf('<a href="http://inbloom.hunterskrasek.com/educationupdates.php?studentId=%s" rel="shadowbox;width=1000px" class="btn btn-small btn-block">Live Feed</a>', $student->id);				
+				print sprintf('<p style="text-align: center; text-size: 20px;"><abbr title="Click to view more"><a href="student.php?id=%s" style="color: #000; 
+                                    text-decorations: none;" rel="shadowbox;width=800px"> %s %s %s</a></abbr><br>'
+                                    ,$student->getId(), $student->getFirstName(), $student->getMiddleName(), $student->getLastSurname());
+				print sprintf('<a href="http://inbloom.hunterskrasek.com/educationupdates.php?studentId=%s" rel="shadowbox;width=1000px" class="btn btn-small btn-block">Live Feed</a>', $student->getId());				
 				print '</p>';
 				print '</div>';
 
