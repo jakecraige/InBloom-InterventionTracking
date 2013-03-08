@@ -2,6 +2,7 @@ InComm
 =============
 An application designed to assist teachers in running their classrooms and keeping in touch with their students parents.
 
+Live Version: http://jakecraige.com/projects/inComm/
 Converted to use MySQL by Jake Craige
 
 Licensed under the Apache License, Version 2.0 (the "License");

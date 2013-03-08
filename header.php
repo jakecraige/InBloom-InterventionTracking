@@ -241,71 +241,7 @@
                 </ul>
               </li>
             </ul>
-            <!--************************************************************************************************-->
-            <script type="text/javascript">
 
-            var apigee = new Usergrid.Client({
-             orgName:'sazua',
-             appName:'sandbox'
-           });
-
-            $(document).ready(function () {
-
-
-
-              setInterval(function () {
-               var number=0;
-                                  //a new Collection object that will be used to hold the full feed list
-                                  var my_books = new Usergrid.Collection({ "client":apigee, "type":"updates","qs":{"ql":"select * where sender='Parent' and read=false"} });
-                                  //make sure messages are pulled back in order
-                                  my_books.fetch(
-
-                                                // Success Callback
-                                                function(){
-
-                                                 while(my_books.hasNextEntity())
-                                                 {
-                                                   var current_book = my_books.getNextEntity();
-
-
-                                                   number=number+1;
-
-
-                                                 }
-                                                 document.getElementById('badge2').innerHTML=number;   
-						if(number>0)
-						{
-					document.getElementById('badge2').setAttribute("class","badge badge-important");
-						}else
-						{
-						document.getElementById('badge2').setAttribute("class", "badge");
-						}
-
-
-                                               },
-
-                                                 // Failure Callback
-                                                 function(){
-                                                   alert("NO");
-                                                 }
-                                                 );
-
-},1000);
-
-
-
-
-
-
-
-
-});
-
-
-
-</script>
-
-<!--***************************************************************************************************-->
 <ul class="nav pull-right">
   <li><a href="http://inbloom.hunterskrasek.com/notes.html" rel="shadowbox; width=500; height=400"><i class="icon-envelope"></i> Notifications <span id="badge2" class="badge">0</span></a></li>
   <li><?php print '<a href="#">'.$json->full_name.'</a>'; ?></li>
