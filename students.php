@@ -3,7 +3,7 @@ session_start();
     require('includes.php');
 	include 'header.php';
 
-    $students = createStudentsArray(); 
+    $students = createStudentsArray($_GET['schoolId']); 
 ?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">

@@ -15,10 +15,10 @@
             print sprintf('<div id="collapse%s" class="accordion-body collapse">',$section->getId());
             print '<div class="accordion-inner">';
             print '<ul class="unstyled">';
-            print sprintf('<li><a href="students.php?sectionId=%s&schoolId=%s"><i class="icon-th"></i>Students</a></li>', $section->getId(), $section->getSchoolId());
+            print sprintf('<li><a href="students.php?classId=%s&schoolId=%s"><i class="icon-th"></i>Students</a></li>', $section->getId(), $section->getSchoolId());
             // print '<li><a href="#"><i class="icon-book"></i>Grades </a><span class="label label-important">NYI</span></li>';
-            print sprintf('<li><a href="attendance.php?sectionId=%s&schoolId=%s"><i class="icon-user"></i>Attendance </a></li>',$section->getId(), $section->getSchoolId());// $section->id, $section->schoolId);
-            print sprintf('<li><a href="participation.php?sectionId=%s&schoolId=%s"><i class="icon-check"></i>Participation </a></li>',$section->getId(), $section->getSchoolId());//$section->id, $section->schoolId);
+            print sprintf('<li><a href="attendance.php?classId=%s&schoolId=%s"><i class="icon-user"></i>Attendance </a></li>',$section->getId(), $section->getSchoolId());// $section->id, $section->schoolId);
+            print sprintf('<li><a href="participation.php?classId=%s&schoolId=%s"><i class="icon-check"></i>Participation </a></li>',$section->getId(), $section->getSchoolId());//$section->id, $section->schoolId);
             print '</ul>';
             print '</div>';
             print '</div>';

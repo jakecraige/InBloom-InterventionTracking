@@ -67,32 +67,36 @@
       $(this).addClass('absent');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Absent');
+	  var classId = document.getElementById("classId").value;
+      postAttendance(studentId, schoolId, classId, 'Absent');
     } else if ($(this).hasClass('absent')) {
       $(this).removeClass('absent');
       $(this).addClass('tardy');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Tardy');
+	  var classId = document.getElementById("classId").value;
+      postAttendance(studentId, schoolId, classId, 'Tardy');
     } else if ($(this).hasClass('tardy')) {
       $(this).removeClass('tardy');
       $(this).addClass('here');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Present');
+	  var classId = document.getElementById("classId").value;
+      postAttendance(studentId, schoolId, classId, 'Present');
     }
     
   }
 
-  function postAttendance(studentId, schoolId, attendanceEvent)
+  function postAttendance(studentId, schoolId, classId, attendanceEvent)
   {
     // var url = 'attendance.php?studentId=' + studentId + "&schoolId=" + schoolId + "&event=" + attendanceEvent;
     $.post('post_attendance.php', {
       'studentId': studentId,
       'schoolId': schoolId,
-      'event': attendanceEvent
+      'event': attendanceEvent,
+	  'classId': classId
     }, function(data) {
-       alert(data);
+     // alert(data);
     });
   }
 
@@ -103,13 +107,15 @@
       $(this).addClass('tardy');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Tardy');
+	  var classId = document.getElementById("classId").value;
+      postAttendance(studentId, schoolId, classId, 'Tardy');
     } else if ($(this).hasClass('absent')) {
       $(this).removeClass('absent');
       $(this).addClass('tardy');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Tardy');
+	  var classId = document.getElementById("classId").value;
+      postAttendance(studentId, schoolId, classId, 'Tardy');
     }
   }
 

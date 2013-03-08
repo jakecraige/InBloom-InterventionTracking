@@ -2,7 +2,6 @@
     class Student 
 	{
 		private $id = null;
-		private $sectionId = null;
 		private $schoolId = null;
 		private $firstName = null;
 		private $middleName = null;
@@ -11,6 +10,7 @@
 		private $sex = null;
 		private $race = null;
 		private $disabilities = null;
+		private $classes = null;
 		private $db;
 		
 		public function __construct($id)
@@ -20,7 +20,6 @@
 			$sql = "SELECT * FROM students WHERE id='$id' LIMIT 1";
 			$result = mysqli_query($this->db, $sql);
 			while($student = mysqli_fetch_array($result)) {
-				$this->sectionId = $student['sectionId'];
 				$this->schoolId = $student['schoolId'];
 				$this->firstName = $student['firstName'];
 				$this->middleName = $student['middleName'];
@@ -29,13 +28,12 @@
 				$this->sex = $student['sex'];
 				$this->race = $student['race'];
 				$this->disabilities = $student['disabilities'];
-				//echo $student['birthday'];
-				//echo $this->birthday;
+				$this->classes = $student['classes'];
+
 			}
 		}
 
     	public function getId() { return $this->id; }
-		public function getSectionId() { return $this->sectionId; }
 		public function getSchoolId() { return $this->sectionId; }
 		public function getFirstName() { return $this->firstName; }
 		public function getMiddleName() { return $this->middleName; }
@@ -57,12 +55,21 @@
 		public function getSex() { return $this->sex; }
 		public function getRace() { return $this->race; }
 		public function getDisabilities() { return $this->disabilities; }
-
+		public function getClasses() { return $this->classes; }
+		public function isEnrolled($classId) {
+			$c = explode(' ', $this->classes);
+			foreach ($c as $studentClassId) {
+				if($studentClassId == $classId) {
+					return true;
+				}
+			}
+			return false;
+		}
 	}
-	function createStudentsArray() {
+	function createStudentsArray($schoolId) {
         $students = array();
         $db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-        $sql = "SELECT * FROM students";
+        $sql = "SELECT * FROM students WHERE schoolId='$schoolId'";
         $result = mysqli_query($db, $sql);
         while($row = mysqli_fetch_array($result)) {
             $students[] = new Student($row['id']);

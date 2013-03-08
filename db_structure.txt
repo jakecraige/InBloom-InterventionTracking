@@ -16,11 +16,12 @@ instructor
 	-firstName
 	-lastSurname
 	
-sections
+classes
 	-id
 	-sectionId
 	-schoolId
 	-title
+	-students
 
 attendance
 	-id

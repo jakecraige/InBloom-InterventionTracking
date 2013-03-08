@@ -1,7 +1,7 @@
 <?php 
 	include 'header.php';
 
-	$students = createStudentsArray();
+	$students = createStudentsArray($_GET['schoolId']);
 ?>
 <div class="container-fluid" style="margin-top: 5%;">
   <div class="row-fluid">
@@ -25,16 +25,38 @@
     	</div>
 		<?php
 			$count = 0;
+			$classId =  $_GET['classId'];
+			$schoolId = $_GET['schoolId'];
 			foreach ($students as $student) 
 			{
+				$attend = new Attendance($student->getId(), $classId, $schoolId, 'Present');
+			
+
 				if($count == 0)
 				{
 					print '<div class="row">';
 				}
 
 				$count++;
-
-				print sprintf('<div id="%s" class="student span2 well well-small here">', $student->getId());
+				
+				if($event = $attend->getAttendanceEvent()) {
+					switch($event) {
+						case 'Present':
+							$class = 'here';
+							break;
+						case 'Absent':
+							$class = 'absent';
+							break;
+						case 'Tardy':
+							$class = 'tardy';
+							break;
+					}
+				}
+				else {
+					$class = 'here';
+				}
+				
+				print sprintf('<div id="%s" class="student span2 well well-small %s"><input type="hidden" id="classId" name ="classId" value="%s">', $student->getId(), $class, $classId);
 				print '<img src="img/userp.png" style="width: 100%; text-align: center;">';
 				print sprintf('<p id="%s" style="text-align: center; font-size: 12px;">%s %s', $_GET['schoolId'], $student->getFirstName, $student->getLastSurname());				
 				print '</p>';

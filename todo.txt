@@ -1,0 +1,1 @@
+change classes and sidebar to use proper naming for "classes"
