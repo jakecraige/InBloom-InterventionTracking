@@ -79,7 +79,7 @@
       $(this).addClass('here');
       var schoolId = $(this).children('p').attr('id');
       var studentId = $(this).attr('id');
-      postAttendance(studentId, schoolId, 'Here');
+      postAttendance(studentId, schoolId, 'Present');
     }
     
   }
@@ -92,7 +92,7 @@
       'schoolId': schoolId,
       'event': attendanceEvent
     }, function(data) {
-      // alert(data);
+       alert(data);
     });
   }
 
