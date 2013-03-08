@@ -1,0 +1,39 @@
+students
+	-id
+	-sectionId
+	-schoolId
+	-firstName
+	-middleName
+	-lastSurname
+	-birthday
+	-sex
+	-race
+	-disabilities
+
+instructor
+	-id
+	-classes (will hold data in schoolId:sectionId format separated by spaces)
+	-firstName
+	-lastSurname
+	
+sections
+	-id
+	-sectionId
+	-schoolId
+	-title
+
+attendance
+	-id
+	-studentId
+	-sectionId
+	-schoolId
+	-date
+	-event (absent, tardy, present)
+
+participation
+	-id
+	-studentId
+	-sectionId
+	-schoolId
+	-date
+	-event (no, yes)
